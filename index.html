@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>static-encrypt</title>
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+      display: grid;
+      place-items: center;
+    }
+
+    form {
+      inline-size: min(100dvi - 16px, 720px);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    label {
+      font-weight: 500;
+    }
+
+    textarea,
+    input,
+    button {
+      inline-size: 100%;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 6px 4px;
+      margin-block-end: 16px;
+    }
+
+    textarea {
+      block-size: 20rem;
+    }
+
+    button {
+      inline-size: fit-content;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid grey;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <form>
+      <label for="content">Content</label>
+      <textarea name="content" id="content" required></textarea>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required>
+
+      <button name="encrypt">Encrypt</button>
+
+      <output name="output"></output>
+    </form>
+  </main>
+
+  <script type="module">
+    async function encrypt(plaintext, password) {
+      const encoder = new TextEncoder();
+      const encodedPlaintext = encoder.encode(plaintext);
+      const encodedPassword = encoder.encode(password);
+
+      const salt = new Uint8Array(32);
+      const iv = new Uint8Array(32);
+      crypto.getRandomValues(salt);
+      crypto.getRandomValues(iv);
+
+      const keyMaterial = await crypto.subtle.importKey(
+        'raw',
+        encodedPassword,
+        'PBKDF2',
+        false,
+        ['deriveKey'],
+      );
+
+      const key = await crypto.subtle.deriveKey(
+        {
+          name: 'PBKDF2',
+          hash: 'SHA-512',
+          salt,
+          iterations: 400_000,
+        },
+        keyMaterial,
+        { 'name': 'AES-GCM', 'length': 256 },
+        false,
+        ['encrypt']
+      );
+
+      const ciphertext = new Uint8Array(await crypto.subtle.encrypt(
+        { name: 'AES-GCM', iv },
+        key,
+        encodedPlaintext,
+      ));
+
+      const contentBuffer = new Uint8Array(salt.byteLength + iv.byteLength + ciphertext.byteLength);
+      contentBuffer.set(salt);
+      contentBuffer.set(iv, salt.byteLength);
+      contentBuffer.set(ciphertext, salt.byteLength + iv.byteLength);
+      const content = btoa(String.fromCharCode(...contentBuffer));
+
+      return content;
+    }
+
+    const template = await fetch('/template.html').then(r => r.text());
+    document.querySelector('form').addEventListener('submit', async e => {
+      e.preventDefault();
+
+      const data = new FormData(e.target);
+      const content = data.get('content');
+      const password = data.get('password');
+
+      const encrypted = await encrypt(content, password);
+      const output = template.replace("const content = 'DO_NOT_MODIFY_THIS_LINE';", `const content = '${encrypted}';`);
+      e.target.elements.output.textContent = output;
+    });
+  </script>
+</body>
+
+</html>
