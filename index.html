@@ -126,6 +126,7 @@
       return content;
     }
 
+    const { default: decrypt } = await import('/decrypt.js');
     const template = await fetch('/template.html').then(r => r.text());
     document.querySelector('form').addEventListener('submit', async e => {
       e.preventDefault();
@@ -135,7 +136,8 @@
       const password = data.get('password');
 
       const encrypted = await encrypt(content, password);
-      const output = template.replace("const content = 'DO_NOT_MODIFY_THIS_LINE';", `const content = '${encrypted}';`);
+      const scriptInjection = `<script>const content = '${encrypted}'; ${decrypt.toString()}<\/script>`;
+      const output = template.replace('<!-- SCRIPT INJECTION -->', scriptInjection);
       e.target.elements.output.textContent = output;
     });
   </script>
