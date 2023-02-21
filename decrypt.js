@@ -14,7 +14,7 @@ export default async function decrypt(content, password) {
     encodedPassword,
     'PBKDF2',
     false,
-    ['deriveKey'],
+    ['deriveKey']
   );
 
   const key = await crypto.subtle.deriveKey(
@@ -22,7 +22,7 @@ export default async function decrypt(content, password) {
       name: 'PBKDF2',
       hash: 'SHA-512',
       salt,
-      iterations: 400_000,
+      iterations: 400_000
     },
     keyMaterial,
     { name: 'AES-GCM', length: 256 },
@@ -33,7 +33,7 @@ export default async function decrypt(content, password) {
   const encodedPlaintext = new Uint8Array(await crypto.subtle.decrypt(
     { name: 'AES-GCM', iv },
     key,
-    ciphertext,
+    ciphertext
   ));
 
   const plaintext = new TextDecoder().decode(encodedPlaintext);

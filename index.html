@@ -95,7 +95,7 @@
         encodedPassword,
         'PBKDF2',
         false,
-        ['deriveKey'],
+        ['deriveKey']
       );
 
       const key = await crypto.subtle.deriveKey(
@@ -103,7 +103,7 @@
           name: 'PBKDF2',
           hash: 'SHA-512',
           salt,
-          iterations: 400_000,
+          iterations: 400_000
         },
         keyMaterial,
         { name: 'AES-GCM', length: 256 },
@@ -114,7 +114,7 @@
       const ciphertext = new Uint8Array(await crypto.subtle.encrypt(
         { name: 'AES-GCM', iv },
         key,
-        encodedPlaintext,
+        encodedPlaintext
       ));
 
       const contentBuffer = new Uint8Array(salt.byteLength + iv.byteLength + ciphertext.byteLength);
