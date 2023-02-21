@@ -18,6 +18,13 @@
       place-items: center;
     }
 
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-block: 48px;
+    }
+
     form {
       inline-size: min(100dvi - 16px, 720px);
       display: flex;
@@ -53,6 +60,11 @@
 </head>
 
 <body>
+  <header>
+    <h1>static-encrypt</h1>
+    <p>Password protect any static content.</p>
+  </header>
+
   <main>
     <form>
       <label for="content">Content</label>
