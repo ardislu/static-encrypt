@@ -50,8 +50,8 @@
       margin-block-end: 16px;
     }
 
-    textarea {
-      block-size: 20rem;
+    output {
+      display: none;
     }
 
     button {
@@ -93,7 +93,11 @@
 
       <button name="encrypt">Encrypt</button>
 
-      <output name="output"></output>
+      <output id="output" name="output">
+        <label for="output">Encrypted content</label>
+        <pre id="ciphertext" readonly></pre>
+        <button id="download">Download HTML file</button>
+      </output>
     </form>
   </main>
 
@@ -157,6 +161,16 @@
       return content;
     }
 
+    function downloadHtml(htmlString, fileName) {
+      const encodedHtml = new TextEncoder().encode(htmlString);
+      const file = new File([encodedHtml], fileName, { type: 'text/html' });
+
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(file);
+      a.download = file.name;
+      a.click();
+    }
+
     const { default: decrypt } = await import('/decrypt.js');
     const template = await fetch('/template.html').then(r => r.text());
     document.querySelector('form').addEventListener('submit', async e => {
@@ -167,10 +181,16 @@
       const password = data.get('password');
 
       const encrypted = await encrypt(content, password);
+      document.querySelector('#output').style.display = 'block';
+      document.querySelector('#ciphertext').textContent = encrypted;
+    });
+
+    document.querySelector('#download').addEventListener('click', e => {
+      const encrypted = document.querySelector('#ciphertext').textContent;
       const scriptInjection = `<script>const content = '${encrypted}'; ${decrypt.toString()}<\/script>`;
       const output = template.replace('<!-- SCRIPT INJECTION -->', scriptInjection);
-      e.target.elements.output.textContent = output;
-    });
+      downloadHtml(output, `${Date.now()}.html`);
+    })
   </script>
 </body>
 
