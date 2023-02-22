@@ -42,23 +42,44 @@
 
     textarea,
     input,
-    button {
+    button,
+    pre {
       inline-size: 100%;
       font-family: inherit;
       font-size: 1rem;
       padding: 6px 4px;
       margin-block-end: 16px;
+      border-radius: 4px;
+      border: 1px solid hsl(216deg 50% 80%);
+      transition: filter 200ms, border 200ms;
+    }
+
+    :is(textarea, input, button, pre):focus-within,
+    button:hover {
+      border: 1px solid hsl(216deg 50% 70%);
+      filter: drop-shadow(0 0 4px hsl(216deg 50% 80%));
+      transition: filter 200ms, border 200ms;
     }
 
     output {
       display: none;
     }
 
+    #content {
+      block-size: 20rem;
+    }
+
+    #ciphertext {
+      overflow-x: auto;
+      background: hsl(216deg 50% 90%);
+      border-radius: 4px;
+    }
+
     button {
       inline-size: fit-content;
       padding: 8px;
-      border-radius: 4px;
-      border: 1px solid grey;
+      background: hsl(216deg 50% 90%);
+      cursor: pointer;
     }
 
     footer {
