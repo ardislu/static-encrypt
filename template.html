@@ -8,10 +8,35 @@
   <title>Enter password</title>
   <style>
     body {
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
       min-block-size: 100dvb;
       margin: 0;
+      background: hsl(216deg 50% 98%);
+      color: hsl(216deg 50% 10%);
       display: grid;
       place-items: center;
+    }
+
+    input,
+    button {
+      font-size: 1rem;
+      padding-inline: 4px;
+      padding-block: 8px 6px;
+      border-radius: 4px;
+      border: 1px solid hsl(216deg 50% 80%);
+      transition: filter 600ms, border 600ms;
+    }
+
+    :is(input, button):focus-within,
+    button:hover {
+      border: 1px solid hsl(216deg 50% 70%);
+      filter: drop-shadow(0 0 4px hsl(216deg 50% 80%));
+      transition: filter 200ms, border 200ms;
+    }
+
+    button {
+      background: hsl(216deg 50% 90%);
+      cursor: pointer;
     }
   </style>
 </head>
