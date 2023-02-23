@@ -17,6 +17,10 @@
       place-items: center;
     }
 
+    label {
+      display: block;
+    }
+
     input,
     button {
       font-size: 1rem;
@@ -44,6 +48,7 @@
 <body>
   <main>
     <form>
+      <label for="password">Password</label>
       <input type="password" name="password" id="password" required>
       <button>Unlock</button>
     </form>
