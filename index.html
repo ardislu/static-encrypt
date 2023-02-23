@@ -139,6 +139,11 @@
     import encrypt from '/encrypt.js';
     import decrypt from '/decrypt.js';
 
+    function setOutput(ciphertext) {
+      document.querySelector('#output').style.display = 'block';
+      document.querySelector('#ciphertext').textContent = ciphertext;
+    }
+
     function downloadHtml(htmlString, fileName) {
       const encodedHtml = new TextEncoder().encode(htmlString);
       const file = new File([encodedHtml], fileName, { type: 'text/html' });
@@ -157,8 +162,7 @@
       const password = data.get('password');
 
       const encrypted = await encrypt(content, password);
-      document.querySelector('#output').style.display = 'block';
-      document.querySelector('#ciphertext').textContent = encrypted;
+      setOutput(encrypted);
     });
 
     document.querySelector('#download').addEventListener('click', e => {
