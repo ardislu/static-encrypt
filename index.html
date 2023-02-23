@@ -194,7 +194,6 @@
       a.click();
     }
 
-    const template = await fetch('/template.html').then(r => r.text());
     document.querySelector('form').addEventListener('submit', async e => {
       e.preventDefault();
 
@@ -213,6 +212,8 @@
       const output = template.replace('<div>SCRIPT INJECTION</div>', scriptInjection);
       downloadHtml(output, `${Date.now()}.html`);
     })
+
+    const template = await fetch('/template.html').then(r => r.text());
   </script>
 </body>
 
