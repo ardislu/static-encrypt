@@ -136,6 +136,8 @@
   </footer>
 
   <script type="module">
+    import decrypt from '/decrypt.js';
+
     async function encrypt(plaintext, password) {
       const encoder = new TextEncoder();
       const encodedPlaintext = encoder.encode(plaintext);
@@ -192,7 +194,6 @@
       a.click();
     }
 
-    const { default: decrypt } = await import('/decrypt.js');
     const template = await fetch('/template.html').then(r => r.text());
     document.querySelector('form').addEventListener('submit', async e => {
       e.preventDefault();
