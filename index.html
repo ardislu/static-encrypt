@@ -42,7 +42,7 @@
 
     textarea,
     input,
-    button,
+    .text-button,
     pre {
       font-family: inherit;
       font-size: 1rem;
@@ -54,7 +54,7 @@
     }
 
     :is(textarea, input, button, pre):focus-within,
-    button:hover {
+    .text-button:hover {
       border: 1px solid hsl(216deg 50% 70%);
       filter: drop-shadow(0 0 4px hsl(216deg 50% 80%));
       transition: filter 200ms, border 200ms;
@@ -68,6 +68,11 @@
       block-size: 20rem;
     }
 
+    .ciphertext-container {
+      display: flex;
+      gap: 8px;
+    }
+
     #ciphertext {
       overflow-x: auto;
       background: hsl(216deg 50% 90%);
@@ -77,8 +82,18 @@
     button {
       inline-size: fit-content;
       padding: 8px;
-      background: hsl(216deg 50% 90%);
       cursor: pointer;
+    }
+
+    .text-button {
+      background: hsl(216deg 50% 90%);
+    }
+
+    .icon-button {
+      background: none;
+      border: none;
+      padding: 6px 4px;
+      margin-block-end: 16px;
     }
 
     footer {
@@ -89,7 +104,7 @@
       color: inherit;
     }
 
-    a>svg {
+    svg {
       inline-size: 24px;
       block-size: 24px;
       color: inherit;
@@ -111,12 +126,24 @@
       <label for="password">Password</label>
       <input type="password" name="password" id="password" required>
 
-      <button name="encrypt">Encrypt</button>
+      <button name="encrypt" class="text-button">Encrypt</button>
 
       <output id="output" name="output">
         <label for="output">Encrypted content</label>
-        <pre id="ciphertext" readonly></pre>
-        <button id="download">Download HTML file</button>
+        <div class="ciphertext-container">
+          <pre id="ciphertext" readonly></pre>
+          <button id="copy" class="icon-button">
+            <svg aria-labelledby="clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <title id="clipboard">Copy to clipboard</title>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              <path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
+              <path d="M16 4h2a2 2 0 0 1 2 2v4"></path>
+              <path d="M21 14H11"></path>
+              <path d="m15 10-4 4 4 4"></path>
+            </svg>
+          </button>
+        </div>
+        <button id="download" class="text-button">Download HTML file</button>
       </output>
     </form>
   </main>
@@ -163,6 +190,12 @@
       const encrypted = await encrypt(content, password);
       setOutput(encrypted);
     });
+
+    document.querySelector('#copy').addEventListener('click', e => {
+      e.preventDefault();
+      const ciphertext = document.querySelector('#ciphertext').textContent;
+      navigator.clipboard.writeText(ciphertext);
+    })
 
     document.querySelector('#download').addEventListener('click', e => {
       e.preventDefault();
