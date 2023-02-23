@@ -30,7 +30,7 @@
       e.preventDefault();
       const password = new FormData(e.target).get('password');
       const newDocument = await decrypt(content, password);
-      
+
       document.open();
       document.write(newDocument);
       document.close();
