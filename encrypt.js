@@ -2,7 +2,7 @@
  * Encrypt a string.
  * @param {string} plaintext - The string to encrypt.
  * @param {string} password - The password used to encrypt the string.
- * @returns {Promise<string>} A promise that resolves the ciphertext.
+ * @returns {Promise<string>} A promise that resolves to the ciphertext.
  */
 export default async function encrypt(plaintext, password) {
   const encoder = new TextEncoder();
