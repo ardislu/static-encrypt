@@ -206,6 +206,19 @@
     })
 
     const template = await fetch('/template.html').then(r => r.text());
+
+    // For debugging and bulk usage in the DevTools console
+    function help() {
+      console.table({
+        'help(): void': 'Print this message.',
+        'encrypt(plaintext: string, password: string): Promise<string>': 'Encrypt a string.',
+        'decrypt(content: string, password: string): Promise<string>': 'Decrypt an encrypted string.'
+      });
+    }
+    globalThis.help = help;
+    globalThis.encrypt = encrypt;
+    globalThis.decrypt = decrypt;
+    help();
   </script>
 </body>
 
