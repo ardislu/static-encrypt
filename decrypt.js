@@ -4,10 +4,10 @@ export default async function decrypt(content, password) {
   const contentBuffer = Uint8Array.from(atob(content), c => c.charCodeAt(0));
   const salt = new Uint8Array(32);
   const iv = new Uint8Array(12);
-  const ciphertext = new Uint8Array(contentBuffer.byteLength - 44);
-  salt.set(contentBuffer.slice(0, 32));
-  iv.set(contentBuffer.slice(32, 44));
-  ciphertext.set(contentBuffer.slice(44));
+  const ciphertext = new Uint8Array(contentBuffer.byteLength - salt.byteLength - iv.byteLength);
+  salt.set(contentBuffer.slice(0, salt.byteLength));
+  iv.set(contentBuffer.slice(salt.byteLength, salt.byteLength + iv.byteLength));
+  ciphertext.set(contentBuffer.slice(salt.byteLength + iv.byteLength));
 
   const keyMaterial = await crypto.subtle.importKey(
     'raw',
