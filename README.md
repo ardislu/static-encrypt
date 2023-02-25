@@ -4,6 +4,8 @@ A tool to encrypt any static content, and (optionally) create a basic password-p
 
 Like [staticrypt](https://github.com/robinmoisson/staticrypt) but uses the modern [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) instead of `crypto-js`.
 
+See [static-encrypt-cli](https://github.com/ardislu/static-encrypt-cli) for a Rust CLI companion to this tool.
+
 ## How to decrypt the encrypted content string manually
 
 1. Import the `decrypt` function provided in `/decrypt.js`:
