@@ -8,6 +8,7 @@ export default async function encrypt(plaintext, password) {
   const encoder = new TextEncoder();
   const encodedPlaintext = encoder.encode(plaintext);
   const encodedPassword = encoder.encode(password);
+  const additionalData = encoder.encode('https://github.com/ardislu/static-encrypt');
 
   const salt = new Uint8Array(32);
   const iv = new Uint8Array(12);
@@ -36,7 +37,7 @@ export default async function encrypt(plaintext, password) {
   );
 
   const ciphertext = new Uint8Array(await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv },
+    { name: 'AES-GCM', iv, additionalData },
     key,
     encodedPlaintext
   ));

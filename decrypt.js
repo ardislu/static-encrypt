@@ -5,7 +5,9 @@
  * @returns {Promise<string>} A promise that resolves to the plaintext.
  */
 export default async function decrypt(content, password) {
-  const encodedPassword = new TextEncoder().encode(password);
+  const encoder = new TextEncoder();
+  const encodedPassword = encoder.encode(password);
+  const additionalData = encoder.encode('https://github.com/ardislu/static-encrypt');
 
   const contentBuffer = Uint8Array.from(atob(content), c => c.charCodeAt(0));
   const salt = new Uint8Array(32);
@@ -37,7 +39,7 @@ export default async function decrypt(content, password) {
   );
 
   const encodedPlaintext = new Uint8Array(await crypto.subtle.decrypt(
-    { name: 'AES-GCM', iv },
+    { name: 'AES-GCM', iv, additionalData },
     key,
     ciphertext
   ));
