@@ -4,7 +4,7 @@ export default async function encrypt(plaintext, password) {
   const encodedPassword = encoder.encode(password);
 
   const salt = new Uint8Array(32);
-  const iv = new Uint8Array(32);
+  const iv = new Uint8Array(12);
   crypto.getRandomValues(salt);
   crypto.getRandomValues(iv);
 
