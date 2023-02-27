@@ -17,7 +17,7 @@ import decrypt from 'https://cdn.jsdelivr.net/gh/ardislu/static-encrypt/decrypt.
 2. Pass the encrypted content string and the password to the `decrypt` function:
 
 ```javascript
-const plaintext = await decrypt('jklWIe958BY3LLgf/RDePN4ThOTUCPwBkEf9uueZRO2g2nVWuk20webn+/HR14b2iJJnYCkzDT05f7qhsnx4Of98uu+T5/oinZsQI3o3mhvPmfIwVAdl2tq1V8cG', 'hunter2');
+const plaintext = await decrypt('ZE33hvS/TCP2pcI0SMp57SHYnxk+mB6u86y0IX9dJJAU7X7d77Wkg4h0iVlcgudL3HKtE8CDx++v90/Ic24Aq0YQgU1zzjuTHg==', 'hunter2');
 ```
 
 3. The `decrypt` function will throw an error if the incorrect password is passed, or return the plaintext:
