@@ -39,6 +39,8 @@ await Promise.all(encryptedContentList.map(v => globalThis.decrypt(v, 'example-p
 
 ## How to decrypt the encrypted content string manually
 
+To integrate the decryption into your own frontend:
+
 1. Import the `decrypt` function provided in `/decrypt.js`:
 
 ```javascript
