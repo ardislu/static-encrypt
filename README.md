@@ -6,6 +6,37 @@ Like [staticrypt](https://github.com/robinmoisson/staticrypt) but uses the moder
 
 See [static-encrypt-cli](https://github.com/ardislu/static-encrypt-cli) for a Rust CLI companion to this tool.
 
+## How to encrypt or decrypt in bulk
+
+The `encrypt` and `decrypt` functions are accessible in the web browser [DevTools](https://developer.mozilla.org/en-US/docs/Glossary/Developer_Tools) console. For bulk usage, you can open the DevTools console while on the [static-encrypt page](https://static-encrypt.ardis.lu/) and directly call the functions. Examples:
+
+```javascript
+// Encrypting several items
+const contentList = ['Static content 1', 'Static content 2', 'Static content 3', 'Static content 4', 'Static content 5'];
+const encryptedContentList = await Promise.all(contentList.map(v => globalThis.encrypt(v, 'example-password')));
+/*
+[
+    "c5VMxXMgLcQGuFXy+iZm1gMqHkwhgCIKd6lDIeOZgskoJ4u6uUzymE6poGAVk532GDhRxCsEEcnNX9kQW1L0NcDB1nBHpY2AGmCUzw==",
+    "Y+i7lX0J9oGJFrPU4QtKhw4V5rMLnj/cppFld55lOXmSoH65kTrJWmNIiRhV37EoDRRuW1SATugZmji1L1sfo3eSminEHCCsODtRiQ==",
+    "WLsUHQ+zR85kxTw6eK9KHJcWGh1KxFzjb6O36WuxG7W4I6LRJwGui5XD3EOg91/Bs+Q+pFzVoE+BN0vKZhSd5ezR1uC3KGQhf0gQTg==",
+    "i+R51OiKz6VPdwg1s/OGl4oxAjW5nXfUMyRzZ9Xk75VzAlfeIZmC8xS8rK7fFwwVy5oHxLVfgYV4HT5IbkZ15R1M5b6xMbBYLy24pw==",
+    "Om4MI5FEkkO5pStSOXOn+KYvvXTeAhj2sl7aQ/by0pw2EKpMzhQz2Mt94F+51iG7KwnPHjoGc+qYlDu85kfMJbd1cKI8K7MF+YqjvA=="
+]
+*/
+
+// Decrypting several items
+await Promise.all(encryptedContentList.map(v => globalThis.decrypt(v, 'example-password')));
+/*
+[
+    "Static content 1",
+    "Static content 2",
+    "Static content 3",
+    "Static content 4",
+    "Static content 5"
+]
+*/
+```
+
 ## How to decrypt the encrypted content string manually
 
 1. Import the `decrypt` function provided in `/decrypt.js`:
