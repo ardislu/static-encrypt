@@ -71,7 +71,12 @@
     }
 
     #content {
+      min-block-size: 5rem;
       block-size: 20rem;
+      min-inline-size: 100%;
+      max-inline-size: calc(100dvi - 16px);
+      align-self: center;
+      white-space: nowrap;
     }
 
     .ciphertext-container {
