@@ -56,15 +56,24 @@
 
   <div>SCRIPT INJECTION</div>
   <script>
+    const input = document.querySelector('input');
+
     document.querySelector('form').addEventListener('submit', async e => {
       e.preventDefault();
       const password = new FormData(e.target).get('password');
-      const newDocument = await decrypt(content, password);
-
-      document.open();
-      document.write(newDocument);
-      document.close();
+      try {
+        const newDocument = await decrypt(content, password);
+        document.open();
+        document.write(newDocument);
+        document.close();
+      }
+      catch {
+        input.setCustomValidity('Incorrect password.');
+        input.reportValidity();
+      }
     });
+
+    input.addEventListener('input', e => e.target.setCustomValidity(''));
   </script>
 </body>
 
