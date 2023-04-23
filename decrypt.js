@@ -4,7 +4,7 @@
  * @param {string} password - The password used to encrypt the string.
  * @returns {Promise<string>} A promise that resolves to the plaintext.
  */
-export default async function decrypt(content, password) {
+export async function decrypt(content, password) {
   const encoder = new TextEncoder();
   const encodedPassword = encoder.encode(password);
   const additionalData = encoder.encode('https://github.com/ardislu/static-encrypt');
