@@ -48,7 +48,7 @@ await Promise.all(encryptedContentList.map(v => globalThis.decrypt(v, 'correctho
 1. Import the `decrypt` function provided in `/decrypt.js`:
 
 ```javascript
-import { decrypt } from 'https://cdn.jsdelivr.net/gh/ardislu/static-encrypt/decrypt.js';
+import { decrypt } from 'https://cdn.statically.io/gh/ardislu/static-encrypt/master/decrypt.js';
 ```
 
 2. Pass the encrypted content string and the password to the `decrypt` function:
@@ -67,5 +67,5 @@ plaintext
 You can also import the function dynamically (useful for lazy-loading or testing in DevTools):
 
 ```javascript
-const { decrypt } = await import('https://cdn.jsdelivr.net/gh/ardislu/static-encrypt/decrypt.js');
+const { decrypt } = await import('https://cdn.statically.io/gh/ardislu/static-encrypt/master/decrypt.js');
 ```
