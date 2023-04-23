@@ -6,26 +6,32 @@ Like [staticrypt](https://github.com/robinmoisson/staticrypt) but uses the moder
 
 See [static-encrypt-cli](https://github.com/ardislu/static-encrypt-cli) for a Rust CLI companion to this tool.
 
-## How to encrypt or decrypt in bulk
+## `encrypt.js` and `decrypt.js`
 
-The `encrypt` and `decrypt` functions are accessible in the web browser [DevTools](https://developer.mozilla.org/en-US/docs/Glossary/Developer_Tools) console. For bulk usage, you can open the DevTools console while on the [static-encrypt page](https://static-encrypt.ardis.lu/) and directly call the functions. Examples:
+Both the `encrypt` and `decrypt` functions are written in vanilla JavaScript with no dependencies and are provided as standalone files for easy integration. Some example uses are described below:
 
+### Encrypt or decrypt in bulk
+
+On the [static-encrypt webpage](https://static-encrypt.ardis.lu/), both the `encrypt` and `decrypt` functions are directly accessible in the web browser [DevTools](https://developer.mozilla.org/en-US/docs/Glossary/Developer_Tools) console for bulk usage.
+
+Example: encrypt several strings quickly
 ```javascript
-// Encrypting several items
 const contentList = ['Static content 1', 'Static content 2', 'Static content 3', 'Static content 4', 'Static content 5'];
-const encryptedContentList = await Promise.all(contentList.map(v => globalThis.encrypt(v, 'example-password')));
+const encryptedContentList = await Promise.all(contentList.map(v => globalThis.encrypt(v, 'correcthorsebatterystaple')));
 /*
 [
-    "c5VMxXMgLcQGuFXy+iZm1gMqHkwhgCIKd6lDIeOZgskoJ4u6uUzymE6poGAVk532GDhRxCsEEcnNX9kQW1L0NcDB1nBHpY2AGmCUzw==",
-    "Y+i7lX0J9oGJFrPU4QtKhw4V5rMLnj/cppFld55lOXmSoH65kTrJWmNIiRhV37EoDRRuW1SATugZmji1L1sfo3eSminEHCCsODtRiQ==",
-    "WLsUHQ+zR85kxTw6eK9KHJcWGh1KxFzjb6O36WuxG7W4I6LRJwGui5XD3EOg91/Bs+Q+pFzVoE+BN0vKZhSd5ezR1uC3KGQhf0gQTg==",
-    "i+R51OiKz6VPdwg1s/OGl4oxAjW5nXfUMyRzZ9Xk75VzAlfeIZmC8xS8rK7fFwwVy5oHxLVfgYV4HT5IbkZ15R1M5b6xMbBYLy24pw==",
-    "Om4MI5FEkkO5pStSOXOn+KYvvXTeAhj2sl7aQ/by0pw2EKpMzhQz2Mt94F+51iG7KwnPHjoGc+qYlDu85kfMJbd1cKI8K7MF+YqjvA=="
+    "LNQ5Afufy7LdgDzA6YT7cvVKh95OP7qGPe25VtcW+u8sFvJFblg6WDoFFWlXWiQ28YCMzr7VKOA9wJnX2uBKvekXG0nU/j+tcAArKA==",
+    "iWaofdEYn1etH2ITbVJXn42qpacHO8vvRq0UPr0xEjD7j26zh7ZMT/0O3aXFcru9wcDcHJ1cmvBetLaNWVNzOOsmb0FYiq+Ucmax+A==",
+    "pf0KN7JApJxc4gi9erUB84Szp1hdRya5shJiya2G9DscY4ekX9hAQKtBw7jRCIaMX/e3FH7jJG9PJpVzb2h4pF4PMXliBCQV4ypUMA==",
+    "IGHUEb4RhwdLnO2KH++gxrlwPBaPPC+13k/m9zg380Y82LAaD0iMASevkdFVnYbAza6Yxji/IwJTacJoOeijvPoP8DCbj4qhd/g+YA==",
+    "wEBT/qm0g5hbGYcUyAMOQZwnjHADwuAjKBvDRmw/PcAAEoma0FKuZbZrHjq8z/2IUlzbhMdnLGC91ODfqu+4j3HH7/idKha1BzVK/w=="
 ]
 */
+```
 
-// Decrypting several items
-await Promise.all(encryptedContentList.map(v => globalThis.decrypt(v, 'example-password')));
+Example: decrypt several strings quickly
+```javascript
+await Promise.all(encryptedContentList.map(v => globalThis.decrypt(v, 'correcthorsebatterystaple')));
 /*
 [
     "Static content 1",
@@ -37,9 +43,7 @@ await Promise.all(encryptedContentList.map(v => globalThis.decrypt(v, 'example-p
 */
 ```
 
-## How to decrypt the encrypted content string manually
-
-To integrate the decryption into your own frontend:
+### Integrate `decrypt` into your own frontend
 
 1. Import the `decrypt` function provided in `/decrypt.js`:
 
