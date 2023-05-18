@@ -6,6 +6,22 @@ Like [StatiCrypt](https://github.com/robinmoisson/staticrypt) but reduced to jus
 
 See [static-encrypt-cli](https://github.com/ardislu/static-encrypt-cli) for a Rust CLI companion to this tool.
 
+## Usage
+
+This tool is inspired by and works similarly to [StatiCrypt](https://robinmoisson.github.io/staticrypt/).
+
+1. Go to [https://static-encrypt.ardis.lu/](https://static-encrypt.ardis.lu/).
+
+2. Enter the HTML or any plaintext you want to encrypt into the **Content** box.
+
+3. Enter the password you want to use to encrypt the content into the **Password** box. Use a long password.
+
+4. Press the `Encrypt` button.
+
+5. Either:
+    - Press `Download HTML file` to download a ready-to-use web page containing your encrypted content, or
+    - Copy the string inside the  `Encrypted content` box and integrate it into your own frontend or use case (see next sections)
+
 ## `encrypt.js` and `decrypt.js`
 
 Both the `encrypt` and `decrypt` functions are written in vanilla JavaScript with no dependencies and are provided as standalone files for easy integration. Some example uses are described below:
