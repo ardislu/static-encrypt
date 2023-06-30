@@ -107,6 +107,31 @@
       margin-block-end: 16px;
     }
 
+    .copied {
+      position: relative;
+    }
+
+    .copied::before {
+      content: '';
+      position: absolute;
+      inset-inline-start: calc(100% - 4px);
+      inset-block-start: calc(50% - 4px);
+      inline-size: 10px;
+      block-size: 10px;
+      background: hsl(216deg 50% 90%);
+      clip-path: polygon(0 50%, 100% 0, 100% 100%);
+    }
+
+    .copied::after {
+      content: 'Copied!';
+      position: absolute;
+      inset-inline-start: calc(100% + 4px);
+      font-weight: 700;
+      background: hsl(216deg 50% 90%);
+      padding: 8px;
+      border-radius: 4px;
+    }
+
     footer {
       margin-block: 24px 16px;
     }
@@ -202,10 +227,13 @@
       setOutput(encrypted);
     });
 
-    document.querySelector('#copy').addEventListener('click', e => {
+    const copyButton = document.querySelector('#copy');
+    copyButton.addEventListener('click', e => {
       e.preventDefault();
       const ciphertext = document.querySelector('#ciphertext').textContent;
       navigator.clipboard.writeText(ciphertext);
+      copyButton.classList.add('copied');
+      setTimeout(() => copyButton.classList.remove('copied'), 2000);
     })
 
     document.querySelector('#download').addEventListener('click', e => {
