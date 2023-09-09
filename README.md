@@ -85,3 +85,13 @@ You can also import the function dynamically (useful for lazy-loading or testing
 ```javascript
 const { decrypt } = await import('https://cdn.statically.io/gh/ardislu/static-encrypt/master/decrypt.js');
 ```
+
+### TypeScript
+
+`*.d.ts` files are generated from the [JSDoc](https://jsdoc.app/) comments using `tsc`:
+
+```
+tsc --declaration --emitDeclarationOnly --allowJs .\decrypt.js .\encrypt.js
+```
+
+These `*.d.ts` files allow `encrypt` and `decrypt` to be imported in `.ts` files with typing.
