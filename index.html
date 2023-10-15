@@ -111,23 +111,29 @@
       position: relative;
     }
 
+    .copied::before,
+    .copied::after {
+      display: var(--display, none);
+      position: absolute;
+      background: hsl(216deg 50% 90%);
+      pointer-events: none;
+      opacity: var(--opacity, 0);
+      transition: opacity 200ms;
+    }
+
     .copied::before {
       content: '';
-      position: absolute;
       inset-inline-start: calc(100% - 4px);
       inset-block-start: calc(50% - 4px);
       inline-size: 10px;
       block-size: 10px;
-      background: hsl(216deg 50% 90%);
       clip-path: polygon(0 50%, 100% 0, 100% 100%);
     }
 
     .copied::after {
       content: 'Copied!';
-      position: absolute;
       inset-inline-start: calc(100% + 4px);
       font-weight: 700;
-      background: hsl(216deg 50% 90%);
       padding: 8px;
       border-radius: 4px;
     }
@@ -168,7 +174,7 @@
         <label for="output">Encrypted content</label>
         <div class="ciphertext-container">
           <pre id="ciphertext" readonly></pre>
-          <button id="copy" class="icon-button">
+          <button id="copy" class="icon-button copied">
             <svg aria-labelledby="clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <title id="clipboard">Copy to clipboard</title>
               <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
@@ -232,8 +238,10 @@
       e.preventDefault();
       const ciphertext = document.querySelector('#ciphertext').textContent;
       navigator.clipboard.writeText(ciphertext);
-      copyButton.classList.add('copied');
-      setTimeout(() => copyButton.classList.remove('copied'), 2000);
+      copyButton.style.setProperty('--display', 'inline');
+      copyButton.style.setProperty('--opacity', 1);
+      setTimeout(() => copyButton.style.setProperty('--opacity', 0), 2000);
+      setTimeout(() => copyButton.style.setProperty('--display', 'none'), 2500);
     })
 
     document.querySelector('#download').addEventListener('click', e => {
