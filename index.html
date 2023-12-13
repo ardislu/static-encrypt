@@ -23,7 +23,7 @@
       font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
       display: grid;
       place-items: center;
-      grid-template-rows: auto auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
       background: hsl(216deg 50% 98%);
       color: hsl(216deg 50% 10%);
     }
@@ -33,6 +33,10 @@
       flex-direction: column;
       align-items: center;
       margin-block: 48px;
+    }
+
+    main {
+      align-self: start;
     }
 
     form {
@@ -189,9 +193,6 @@
       </output>
     </form>
   </main>
-
-  <!-- Spacer to push the footer to the bottom -->
-  <div></div>
 
   <footer>
     <a href="https://github.com/ardislu/static-encrypt">
