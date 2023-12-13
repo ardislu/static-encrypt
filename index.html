@@ -154,6 +154,13 @@
       inline-size: 24px;
       block-size: 24px;
       color: inherit;
+      transition: scale 400ms;
+    }
+
+    svg:hover,
+    :is(a, button):focus svg {
+      scale: 110%;
+      transition: scale 200ms;
     }
   </style>
 </head>
