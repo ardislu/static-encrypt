@@ -256,7 +256,7 @@
       e.preventDefault();
       const encrypted = document.querySelector('#ciphertext').textContent;
       const scriptInjection = `<script>const content = '${encrypted}'; ${decrypt.toString()}<\/script>`;
-      const output = template.replace('<div>SCRIPT INJECTION</div>', scriptInjection);
+      const output = template.replace('<template id="script-injection"></template>', scriptInjection);
       downloadHtml(output, `${Date.now()}.html`);
     })
 
