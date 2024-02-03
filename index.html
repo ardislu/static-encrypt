@@ -39,7 +39,7 @@
       align-self: start;
     }
 
-    form {
+    form, output {
       inline-size: min(100dvi - 16px, 720px);
       display: flex;
       flex-direction: column;
@@ -216,7 +216,7 @@
     import { decrypt } from '/decrypt.js';
 
     function setOutput(ciphertext) {
-      document.querySelector('#output').style.display = 'block';
+      document.querySelector('#output').style.setProperty('display', 'flex');
       document.querySelector('#ciphertext').textContent = ciphertext;
     }
 
