@@ -13,7 +13,7 @@
   <link rel="icon" href="data:,">
   <link rel="modulepreload" href="/encrypt.js" crossorigin>
   <link rel="modulepreload" href="/decrypt.js" crossorigin>
-  <link rel="preload" as="fetch" href="/template.html" crossorigin>
+  <link rel="preload" as="fetch" href="/template" crossorigin>
   <title>static-encrypt</title>
   <style>
     * {
@@ -263,7 +263,7 @@
       downloadHtml(output, `${Date.now()}.html`);
     })
 
-    const template = await fetch('/template.html').then(r => r.text());
+    const template = await fetch('/template').then(r => r.text());
 
     // For debugging and bulk usage in the DevTools console
     globalThis.help = function () {

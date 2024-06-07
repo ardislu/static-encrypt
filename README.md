@@ -95,3 +95,11 @@ tsc --declaration --emitDeclarationOnly --allowJs .\decrypt.js .\encrypt.js
 ```
 
 These `*.d.ts` files allow `encrypt` and `decrypt` to be imported in `.ts` files with typing.
+
+## Local testing
+
+Host the files on any web host configured to serve static files and add a default file extension of `.html` to plain paths. For example, using [local-web-server](https://github.com/lwsjs/local-web-server/):
+
+```
+ws --static.extensions html 
+```
