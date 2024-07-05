@@ -86,6 +86,20 @@ You can also import the function dynamically (useful for lazy-loading or testing
 const { decrypt } = await import('https://cdn.statically.io/gh/ardislu/static-encrypt/master/decrypt.js');
 ```
 
+### Encrypt an entire HTML page
+
+The generated HTML file uses [`document.write()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/write) to replace the entire document when the correct password is entered. So you can input arbitrary HTML into the "Content" box to simulate a new page loading in:
+
+1. Populate HTML into the "Content" box then encrypt and download the HTML page normally:
+
+![The static-encrypt frontend populate with HTML in the "Content" box.](./.github/1.png)
+
+2. The HTML will be displayed only when the correct password is input:
+
+![The downloaded password-protected HTML page with the correct password input.](./.github/2.png)
+
+![The HTML from the "Content" box rendered correctly.](./.github/3.png)
+
 ### TypeScript
 
 `*.d.ts` files are generated from the [JSDoc](https://jsdoc.app/) comments using `tsc`:
