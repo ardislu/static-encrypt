@@ -22,6 +22,20 @@ This tool is inspired by and works similarly to [StatiCrypt](https://robinmoisso
     - Press `Download HTML file` to download a ready-to-use web page containing your encrypted content, or
     - Copy the string inside the  `Encrypted content` box and integrate it into your own frontend or use case (see next sections)
 
+## Example
+
+The generated HTML file uses [`document.write()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/write) to replace the entire document when the correct password is entered. So you can input arbitrary HTML into the "Content" box to simulate a new page loading in:
+
+1. Populate HTML into the "Content" box then encrypt and download the HTML page normally:
+
+![The static-encrypt frontend populate with HTML in the "Content" box.](./.github/1.png)
+
+2. The HTML will be displayed only when the correct password is input:
+
+![The downloaded password-protected HTML page with the correct password input.](./.github/2.png)
+
+![The HTML from the "Content" box rendered correctly.](./.github/3.png)
+
 ## `encrypt.js` and `decrypt.js`
 
 Both the `encrypt` and `decrypt` functions are written in vanilla JavaScript with no dependencies and are provided as standalone files for easy integration. Some example uses are described below:
@@ -85,20 +99,6 @@ You can also import the function dynamically (useful for lazy-loading or testing
 ```javascript
 const { decrypt } = await import('https://cdn.statically.io/gh/ardislu/static-encrypt/master/decrypt.js');
 ```
-
-### Encrypt an entire HTML page
-
-The generated HTML file uses [`document.write()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/write) to replace the entire document when the correct password is entered. So you can input arbitrary HTML into the "Content" box to simulate a new page loading in:
-
-1. Populate HTML into the "Content" box then encrypt and download the HTML page normally:
-
-![The static-encrypt frontend populate with HTML in the "Content" box.](./.github/1.png)
-
-2. The HTML will be displayed only when the correct password is input:
-
-![The downloaded password-protected HTML page with the correct password input.](./.github/2.png)
-
-![The HTML from the "Content" box rendered correctly.](./.github/3.png)
 
 ### TypeScript
 
