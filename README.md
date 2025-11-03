@@ -6,6 +6,8 @@ Like [StatiCrypt](https://github.com/robinmoisson/staticrypt) but reduced to jus
 
 See [static-encrypt-cli](https://github.com/ardislu/static-encrypt-cli) for a Rust CLI companion to this tool.
 
+Also see [static-encrypt-passkey](https://github.com/ardislu/static-encrypt-passkey) for the same concept but using *passkeys* instead of passwords.
+
 ## Usage
 
 This tool is inspired by and works similarly to [StatiCrypt](https://robinmoisson.github.io/staticrypt/).
