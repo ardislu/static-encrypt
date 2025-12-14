@@ -8,6 +8,8 @@ See [static-encrypt-cli](https://github.com/ardislu/static-encrypt-cli) for a Ru
 
 Also see [static-encrypt-passkey](https://github.com/ardislu/static-encrypt-passkey) for the same concept but using *passkeys* instead of passwords.
 
+Code repository mirrors: [GitHub](https://github.com/ardislu/static-encrypt), [Codeberg](https://codeberg.org/ardislu/static-encrypt), [git.ardis.lu](https://git.ardis.lu/static-encrypt)
+
 ## Usage
 
 This tool is inspired by and works similarly to [StatiCrypt](https://robinmoisson.github.io/staticrypt/).
