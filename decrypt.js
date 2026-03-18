@@ -9,7 +9,7 @@ export async function decrypt(content, password) {
   const encodedPassword = encoder.encode(password);
   const additionalData = encoder.encode('https://github.com/ardislu/static-encrypt');
 
-  const contentBuffer = Uint8Array.from(atob(content), c => c.charCodeAt(0));
+  const contentBuffer = Uint8Array.fromBase64(content);
   const salt = new Uint8Array(32);
   const iv = new Uint8Array(12);
   const ciphertext = new Uint8Array(contentBuffer.byteLength - salt.byteLength - iv.byteLength);

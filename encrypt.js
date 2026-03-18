@@ -46,7 +46,7 @@ export async function encrypt(plaintext, password) {
   contentBuffer.set(salt);
   contentBuffer.set(iv, salt.byteLength);
   contentBuffer.set(ciphertext, salt.byteLength + iv.byteLength);
-  const content = btoa(String.fromCharCode(...contentBuffer));
+  const content = contentBuffer.toBase64();
 
   return content;
 }
