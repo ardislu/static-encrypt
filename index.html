@@ -258,8 +258,9 @@
     document.querySelector('#download').addEventListener('click', e => {
       e.preventDefault();
       const encrypted = document.querySelector('#ciphertext').textContent;
-      const scriptInjection = `<script>const content = '${encrypted}'; ${decrypt.toString()}<\/script>`;
-      const output = template.replace('<template id="script-injection"></template>', scriptInjection);
+      const script = template.match(/<script.*>([\s\S]*)<\/script>/i)?.[1];
+      const injectedScript = `const content = '${encrypted}'; ${decrypt.toString()} ${script}`;
+      const output = template.replace(/(<script.*)>[\s\S]*<\/script>/i, `$1>${injectedScript}<\/script>`);
       downloadHtml(output, `${Date.now()}.html`);
     })
 
