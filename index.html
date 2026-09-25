@@ -255,12 +255,13 @@
       setTimeout(() => copyButton.style.setProperty('--display', 'none'), 2500);
     })
 
-    document.querySelector('#download').addEventListener('click', e => {
+    document.querySelector('#download').addEventListener('click', async e => {
       e.preventDefault();
       const encrypted = document.querySelector('#ciphertext').textContent;
       const script = template.match(/<script.*>([\s\S]*)<\/script>/i)?.[1];
       const injectedScript = `const content = '${encrypted}'; ${decrypt.toString()} ${script}`;
-      const output = template.replace(/(<script.*)>[\s\S]*<\/script>/i, `$1>${injectedScript}<\/script>`);
+      const scriptHash = new Uint8Array(await crypto.subtle.digest('SHA-512', new TextEncoder().encode(injectedScript))).toBase64();
+      const output = template.replace(/(<script.*)>[\s\S]*<\/script>/i, `$1 integrity="sha512-${scriptHash}">${injectedScript}<\/script>`);
       downloadHtml(output, `${Date.now()}.html`);
     })
 
