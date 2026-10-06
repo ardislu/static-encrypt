@@ -21,14 +21,28 @@
       box-sizing: border-box;
     }
 
+    :root {
+      color-scheme: light dark;
+      --bg-color: light-dark(hsl(216deg 50% 98%), hsl(216deg 50% 20%));
+      --font-color: light-dark(hsl(216deg 50% 10%), hsl(216deg 60% 98%));
+      --border-color: light-dark(hsl(216deg 50% 80%), hsl(216deg 50% 50%));
+      --border-focus-color: light-dark(hsl(216deg 50% 70%), hsl(216deg 50% 60%));
+      --shadow-color: light-dark(hsl(216deg 50% 80%), hsl(216deg 50% 20%));
+      --surface-color: light-dark(hsl(216deg 50% 90%), hsl(216deg 75% 30%));
+    }
+
+    ::selection {      
+      background: hsl(216deg 50% 60%);
+    }
+
     body {
       min-block-size: 100dvb;
       font-family: system-ui, sans-serif;
       display: grid;
       place-items: center;
       grid-template-rows: auto 1fr auto;
-      background: hsl(216deg 50% 98%);
-      color: hsl(216deg 50% 10%);
+      background: var(--bg-color);
+      color: var(--font-color);
     }
 
     header {
@@ -62,14 +76,14 @@
       padding: 6px 4px;
       margin-block-end: 16px;
       border-radius: 4px;
-      border: 1px solid hsl(216deg 50% 80%);
+      border: 1px solid var(--border-color);
       transition: filter 600ms, border 600ms;
     }
 
     :is(textarea, input, .text-button, pre):focus-within,
     .text-button:hover {
-      border: 1px solid hsl(216deg 50% 70%);
-      filter: drop-shadow(0 0 4px hsl(216deg 50% 80%));
+      border: 1px solid var(--border-focus-color);
+      filter: drop-shadow(0 0 4px var(--shadow-color));
       transition: filter 200ms, border 200ms;
     }
 
@@ -93,7 +107,7 @@
 
     #ciphertext {
       overflow-x: auto;
-      background: hsl(216deg 50% 90%);
+      background: var(--surface-color);
       border-radius: 4px;
     }
 
@@ -104,7 +118,7 @@
     }
 
     .text-button {
-      background: hsl(216deg 50% 90%);
+      background: var(--surface-color);
     }
 
     .icon-button {
@@ -122,7 +136,7 @@
     .copied::after {
       display: var(--display, none);
       position: absolute;
-      background: hsl(216deg 50% 90%);
+      background: var(--surface-color);
       pointer-events: none;
       opacity: var(--opacity, 0);
       transition: opacity 200ms;
